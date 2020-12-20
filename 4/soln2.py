@@ -17,8 +17,6 @@ for passport in list_passports:
     fields = passport.split()
     dict_f = dict(i.split(':') for i in fields)
     if required_fields != (set(dict_f.keys()) - set(['cid'])):
-        print(set(dict_f.keys()))
-        print(set(dict_f.keys()) - set(['cid']))
         continue
     val_byr = 1920 <= int(dict_f['byr']) <= 2002
     val_iyr = 2010 <= int(dict_f['iyr']) <= 2020
@@ -41,18 +39,8 @@ for passport in list_passports:
     val_ecl = allowed_ecl.issuperset([dict_f['ecl']])
     val_pid = len(dict_f['pid']) == 9 and dict_f['pid'].isnumeric()
 
-    print('--------------------------------------------------\n')
-    print(passport)
-    print('byr', val_byr)
-    print('iyr', val_iyr)
-    print('eyr', val_eyr)
-    print('hgt', val_hgt)
-    print('hcl', val_hcl)
-    print('ecl', val_ecl)
-    print('pid', val_pid, dict_f['pid'])
     is_valid = val_byr and val_iyr and val_eyr and val_hgt and val_hcl and\
         val_ecl and val_pid
-    print('Is valid?', is_valid)
     num_valid += is_valid
 
 print(num_valid)
